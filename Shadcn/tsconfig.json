@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./",
+      "paths": {
+        "@/*": ["src/*"] // Match the alias defined in `vite.config.js`
+      }
+    }
+  }
+  
