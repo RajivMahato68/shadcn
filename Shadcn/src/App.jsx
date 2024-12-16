@@ -1,10 +1,11 @@
-import "./App.css";
+// import "./App.css";
+import Pages from "./Components/pages";
 
 function App() {
   return (
     <>
       <div>
-        <h1 className="text-3xl font-bold underline">Project setup</h1>
+        <Pages />
       </div>
     </>
   );
