@@ -1,6 +1,6 @@
 function Blog() {
   return (
-    <div>
+    <div className="text-3xl font-bold mt-20">
       <h1>Blog</h1>
     </div>
   );

@@ -1,8 +1,7 @@
-// Components/footer.jsx
 function Footer() {
   return (
     <div>
-      <p>This is the footer</p>
+      <p className=" text-center">This is the footer</p>
     </div>
   );
 }

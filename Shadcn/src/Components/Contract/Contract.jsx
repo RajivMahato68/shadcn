@@ -1,6 +1,6 @@
 function Contract() {
   return (
-    <div>
+    <div className="text-3xl font-bold mt-20">
       <h1>Contract</h1>
     </div>
   );

@@ -155,7 +155,7 @@ const data = {
 
 export function AppSidebar(props) {
   return (
-    <Sidebar collapsible="icon" {...props} classname="mt-20">
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
