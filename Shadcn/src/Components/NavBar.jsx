@@ -97,6 +97,15 @@ function NavBar() {
                 Dashboard
               </Link>
             </li>
+            <li>
+              <Link
+                to="/mail"
+                className="hover:text-gray-700 dark:hover:text-gray-300"
+                onClick={handleNavLinkClick}
+              >
+                Mail
+              </Link>
+            </li>
           </ul>
           <div className="mt-4 lg:mt-0 lg:ml-4">
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
