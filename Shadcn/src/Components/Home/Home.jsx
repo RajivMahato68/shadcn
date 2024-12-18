@@ -1,7 +1,9 @@
+import Hero from "../Hero/Hero";
+
 export default function Home() {
   return (
-    <div className="text-3xl font-bold mt-20">
-      <h1>hello</h1>
+    <div className="flex items-center justify-center mt-20">
+      <Hero />
     </div>
   );
 }
