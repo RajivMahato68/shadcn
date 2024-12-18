@@ -1,38 +1,17 @@
 import React, { useState, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { cn } from "@/lib/utils";
-import { useMetaColor } from "@/hooks/UseMetaColor";
 import { Button } from "@/Components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/Components/ui/drawer";
+import { docsConfig } from "../../../config/Docs";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
-  const { setMetaColor, metaColor } = useMetaColor();
 
-  // Define docsConfig inside the component
-  const docsConfig = {
-    mainNav: [
-      { title: "Home", href: "/" },
-      { title: "Docs", href: "/about" },
-      { title: "Components", href: "/blog" },
-      { title: "Blocks", href: "/contract" },
-      { title: "Charts", href: "/dashboard" },
-      { title: "Mail", href: "/mail" },
-      { title: "Colors", href: "/colors" },
-    ],
-  };
-
-  const onOpenChange = useCallback(
-    (open) => {
-      setOpen(open);
-      setMetaColor(open ? "#09090b" : metaColor);
-    },
-    [setMetaColor, metaColor]
-  );
+  const onOpenChange = useCallback((open) => {
+    setOpen(open);
+  }, []);
 
   return (
-    <Drawer open={open} onOpenChange={onOpenChange} placement="left">
+    <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerTrigger asChild>
         <Button
           variant="ghost"
@@ -55,21 +34,48 @@ export function MobileNav() {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="p-0">
+      <DrawerContent className="max-h-[60svh] p-0">
         <div className="overflow-auto p-6">
           <div className="flex flex-col space-y-3">
-            {docsConfig.mainNav?.map(
-              (item) =>
-                item.href && (
-                  <MobileLink
-                    key={item.href}
-                    href={item.href}
-                    onOpenChange={setOpen}
-                  >
-                    {item.title}
-                  </MobileLink>
-                )
+            {docsConfig.mainNav.map((item) =>
+              item.href ? (
+                <MobileLink
+                  key={item.href}
+                  href={item.href}
+                  onOpenChange={setOpen}
+                >
+                  {item.title}
+                </MobileLink>
+              ) : null
             )}
+          </div>
+          <div className="flex flex-col space-y-2">
+            {docsConfig.sidebarNav.map((category, index) => (
+              <div key={index} className="flex flex-col space-y-3 pt-6">
+                <h4 className="font-medium">{category.title}</h4>
+                {category.items.map((item) => (
+                  <React.Fragment key={item.href}>
+                    {!item.disabled &&
+                      (item.href ? (
+                        <MobileLink
+                          href={item.href}
+                          onOpenChange={setOpen}
+                          className="text-muted-foreground"
+                        >
+                          {item.title}
+                          {item.label && (
+                            <span className="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline">
+                              {item.label}
+                            </span>
+                          )}
+                        </MobileLink>
+                      ) : (
+                        item.title
+                      ))}
+                  </React.Fragment>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </DrawerContent>
@@ -77,20 +83,15 @@ export function MobileNav() {
   );
 }
 
-function MobileLink({ href, onOpenChange, className, children, ...props }) {
-  const navigate = useNavigate();
+function MobileLink({ href, onOpenChange, className, children }) {
+  const handleClick = () => {
+    window.location.href = href;
+    onOpenChange(false);
+  };
 
   return (
-    <Link
-      to={href}
-      onClick={() => {
-        navigate(href);
-        if (onOpenChange) onOpenChange(false);
-      }}
-      className={cn("text-base", className)}
-      {...props}
-    >
+    <a href={href} onClick={handleClick} className={`text-base ${className}`}>
       {children}
-    </Link>
+    </a>
   );
 }
