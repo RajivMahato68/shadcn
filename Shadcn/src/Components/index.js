@@ -6,5 +6,6 @@ import About from "../Components/About/About"
 import Dashboard from "../Components/Dashboard/Dashboard"
 import { Blog } from "../Components/Blog/Blog"
 import { Contract } from "../Components/Contract/Contract"
+import Login from "../Components/Layout/Login";
 
-export { Home, NavBar, Footer, Dashboard, About, Blog, Contract };
+export { Home, NavBar, Footer, Dashboard, About, Blog, Contract, Login };

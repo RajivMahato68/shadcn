@@ -72,6 +72,17 @@ export function MainNav() {
           Mail
         </Link>
         <Link
+          to="/layout"
+          className={cn(
+            "transition-colors hover:text-foreground/80",
+            location.pathname?.startsWith("/layout")
+              ? "text-foreground"
+              : "text-foreground/80"
+          )}
+        >
+          Login
+        </Link>
+        <Link
           to="/colors"
           className={cn(
             "transition-colors hover:text-foreground/80",
